@@ -1,24 +1,33 @@
+Git repo maven code jenkinsfile
 pipeline
 {
-    agent any 
-    stages
-    {
-        stage ('scm checkout')
-        {steps {git branch: 'master', url: 'https://github.com/Amfaa/maven-project.git'}}
+agent any
+stages
+{
+   stage('scm checkout')
+   { steps {  git branch: 'master', url: 'https://github.com/prakashk0301/maven-project'  }  }
 
-        stage ('execute unit test')
-        {steps { withMaven(jdk: 'JDK_HOME', maven: 'Maven_Home') 
-          {sh 'mvn test'}
-        }      }
 
-        stage ('code build && generate artifacts')
-        {steps { withMaven(jdk: 'JDK_HOME', maven: 'Maven_Home') 
-            {sh 'mvn clean package'}
-        }   }
+   stage('execute unit test')
+   { steps {  withMaven(jdk: 'MY_JDK', maven: 'MY_MAVEN') 
+      { sh 'mvn test' }   
+   } }
 
-        stage ('deploy to a dev tomcat')
-        {steps { sshagent(['tomcatdeploy'])
-        sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@13.235.13.64:/var/lib/tomact/webapps' }   }
-       
-    }
+   stage('code build && generate artifacts')
+   { steps { withMaven(jdk: 'MY_JDK', maven: 'MY_MAVEN') 
+      { sh 'mvn clean package' }  
+   } }
+
+   stage('create docker image')   
+   {  steps { sh 'docker build -t pkw0301/june-docker:v1 .'}
+
+   }
+
+   stage('push to dockerhub') 
+   { steps { withDockerRegistry(credentialsId: 'DockerHubID', url: 'https://index.docker.io/v1/') 
+   { sh 'docker push pkw0301/june-docker:v1'}
+   }
+   
+}
+}
 }
