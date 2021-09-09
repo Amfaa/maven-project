@@ -11,7 +11,7 @@ pipeline
           {sh 'mvn test'}
         }      }
 
-        stages ('code build && generate artifacts')
+        stage ('code build && generate artifacts')
         {steps { withMaven(jdk: 'JDK_HOME', maven: 'Maven_Home') 
             {sh 'mvn clean package'}
         }   }
