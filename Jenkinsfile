@@ -16,6 +16,10 @@ stages
    { steps { withMaven(jdk: 'JDK_HOME', maven: 'Maven_Home') 
       { sh 'mvn clean package' }  
    } }
+   
+   stage('  create docker image & push to dockerhub')
+   {steps { sh 'docker build -t amfaa/docker:v1 .'}
+   
  
    
    
