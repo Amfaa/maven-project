@@ -8,12 +8,12 @@ stages
 
 
    stage('execute unit test')
-   { steps {  withMaven(jdk: 'JDK_HOME', maven: 'MY_MAVEN') 
+   { steps {  withMaven(jdk: 'JDK_HOME', maven: 'Maven_Home') 
       { sh 'mvn test' }   
    } }
 
    stage('code build && generate artifacts')
-   { steps { withMaven(jdk: 'JDK_HOME', maven: 'MY_MAVEN') 
+   { steps { withMaven(jdk: 'JDK_HOME', maven: 'Maven_Home') 
       { sh 'mvn clean package' }  
    } }
  
