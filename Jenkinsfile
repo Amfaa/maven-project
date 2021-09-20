@@ -18,7 +18,7 @@ stages
    } }
    
    stage('  create docker image & push to dockerhub')
-   {steps { sh 'docker build -t amfaa/docker:v1 .'}
+   {steps { sh 'docker build -t amfaa/docker:v1 .'} }
    
  
    
