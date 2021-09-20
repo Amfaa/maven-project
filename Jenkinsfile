@@ -1,4 +1,3 @@
-Git repo maven code jenkinsfile
 pipeline
 {
 agent any
@@ -17,7 +16,7 @@ stages
    { steps { withMaven(jdk: 'MY_JDK', maven: 'MY_MAVEN') 
       { sh 'mvn clean package' }  
    } }
-
+ 
    
    
 }
