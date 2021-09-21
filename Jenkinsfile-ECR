@@ -21,7 +21,7 @@ stages
    {steps { sh 'docker build -t 996198785118.dkr.ecr.ap-south-1.amazonaws.com/devops-repo:latest.'} }
    
    stage ('push to AWS ECR')
-   {steps { withAWS(User: 'iam-user-mazhar', url: 996198785118.dkr.ecr.ap-south-1.amazonaws.com/devops-repo')
+   {steps { withAWS(User: 'iam-user-mazhar', url: '996198785118.dkr.ecr.ap-south-1.amazonaws.com/devops-repo')
            { sh 'docker push 996198785118.dkr.ecr.ap-south-1.amazonaws.com/devops-repo:latest' }
           }
    }
