@@ -1,0 +1,21 @@
+pipeline
+{
+agent any
+stages
+{
+   stage('scm checkout')
+   { steps {  git branch: 'master', url: 'https://github.com/Amfaa/maven-project.git'  }  }
+
+
+   stage('build the code')
+   { steps {  withMaven(jdk: 'JDK_HOME', maven: 'Maven_Home') 
+      { sh 'mvn test' }   
+   } }
+
+   stage('copy playbooks from workspace to ansible master && run playbook to deploy artifact from ansible master to dev remote server')
+   { steps { } }
+   
+  
+
+}
+}
